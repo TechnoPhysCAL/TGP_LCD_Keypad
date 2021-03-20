@@ -2,22 +2,21 @@
 #define Calibration_h
 
 #include "Arduino.h"
-#include "ClavierACL.h"
 #include "LiquidCrystal.h"
-
-
+#include "EEPROM.h"
 
 class Calibration
 {
-  public:
-    Calibration();
-	void calibrer(ClavierACL bouton, LiquidCrystal lcd); 
+public:
+  Calibration();
+  int * calibrer(LiquidCrystal* lcd, int eepromAdress);
 
-  private:
-	int lecture();
+private:
+  int _keys_values[5];
+  int lireAnalog();
+  void lireEEPROM(int address);
+  void ecrireEEPROM(int address);
 
-	
-	
 };
 
 #endif

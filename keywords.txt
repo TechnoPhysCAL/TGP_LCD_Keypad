@@ -6,22 +6,27 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-LCDKeypad KEYWORD1
+LCDKeypad   KEYWORD1
+
+
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
+begtin	KEYWORD2
 refresh	KEYWORD2
-gauche	KEYWORD2
-droite	KEYWORD2
-haut	KEYWORD2
-bas	KEYWORD2
-selection	KEYWORD2
-ecran	KEYWORD2
 
 setDebounceDelay	KEYWORD2
 setLongPressDelay	KEYWORD2
 setLongPressInterval	KEYWORD2
+
 ######################################
 # Constants (LITERAL1)
 #######################################
+gauche	LITERAL1
+droite	LITERAL1
+haut	LITERAL1
+bas	LITERAL1
+selection	LITERAL1
+ecran	LITERAL1
+retro   LITERAL1
