@@ -1,3 +1,13 @@
+/*
+     LCDKeypad_demo.ino
+     PAR : Claude Bouchard
+     Date : mars 2021
+
+     Permet de tester le blindage de type 'LCD Keypad Shield'
+     Pour calibrer les boutons, veuillez conserver le bouton 'Droite' enfoncé et appuyez-relachez le bouton 'Reset'.
+     Puis, suivez les directives sur l'écran LCD.
+*/
+
 #include <LCDKeypad.h>
 LCDKeypad lcdKeypad;
 
@@ -12,12 +22,12 @@ void loop()
 
   if (lcdKeypad.haut.isPressed() || lcdKeypad.haut.isLongPressed())  //Le bouton HAUT ou BAS est appuyé
   {
-    lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() + 5); //allumer la Del rouge.
+    lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() + 5); //Augmenter la luminosité du rétroéclairage
 
   }
   if (lcdKeypad.bas.isPressed() || lcdKeypad.bas.isLongPressed())  //Le bouton HAUT ou BAS est appuyé
   {
-    lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() - 5); //allumer la Del rouge.
+    lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() - 5); //Diminuer la luminosité du rétroéclairage
 
   }
 

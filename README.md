@@ -36,12 +36,12 @@ void loop()
 
   if (lcdKeypad.haut.isPressed() || lcdKeypad.haut.isLongPressed())  //Le bouton HAUT ou BAS est appuyé
   {
-    lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() + 5); //allumer la Del rouge.
+    lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() + 5); //Augmenter la luminosité du rétroéclairage
 
   }
   if (lcdKeypad.bas.isPressed() || lcdKeypad.bas.isLongPressed())  //Le bouton HAUT ou BAS est appuyé
   {
-    lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() - 5); //allumer la Del rouge.
+    lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() - 5); //Diminuer la luminosité du rétroéclairage
 
   }
 
