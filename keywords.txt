@@ -8,12 +8,10 @@
 
 LCDKeypad   KEYWORD1
 
-
-
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-begtin	KEYWORD2
+begin	KEYWORD2
 refresh	KEYWORD2
 
 setDebounceDelay	KEYWORD2
