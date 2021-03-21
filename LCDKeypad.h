@@ -10,7 +10,6 @@
 #include "EcranLCD.h"
 #include "Del.h"
 
-
 #define PIN_KEYPAD 0
 #define NB_BOUTONS_LCD 5
 #define DEFAULT_EEPPROM_ADDRESS 0
@@ -22,7 +21,7 @@ class LCDKeypad
 {
 public:
   LCDKeypad();
-  void begin(int eepromAddress=DEFAULT_EEPPROM_ADDRESS);
+  void begin(int eepromAddress = DEFAULT_EEPPROM_ADDRESS);
   void refresh();
 
   void setDebounceDelay(unsigned long);

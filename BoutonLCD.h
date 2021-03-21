@@ -8,7 +8,8 @@ class BoutonLCD : public BoutonBase
 public:
   BoutonLCD(int min, int max);
   void setKeyValue(int value);
-   void setLimits(int min, int max);
+  void setLimits(int min, int max);
+
 protected:
   bool isDetected();
 
