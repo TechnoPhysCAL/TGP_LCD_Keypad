@@ -9,11 +9,10 @@ class Calibration
 {
 public:
   Calibration();
-  int * calibrer(LiquidCrystal* lcd, int eepromAdress);
+  int * calibrer(int pin, LiquidCrystal* lcd, int eepromAdress);
 
 private:
   int _keys_values[5];
-  int lireAnalog();
   void lireEEPROM(int address);
   void ecrireEEPROM(int address);
 

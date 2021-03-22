@@ -1,22 +1,20 @@
 #include "EcranLCD.h"
 
-EcranLCD::EcranLCD() : LiquidCrystal(8,9,4,5,6,7)
+EcranLCD::EcranLCD(int rs, int en, int d4, int d5, int d6, int d7) : LiquidCrystal(rs, en, d4, d5, d6, d7)
 {
 
   _utf8 = 0;
   _utf8_error = false;
   _unicode = 0;
- 
 }
 
 void EcranLCD::begin()
 {
-  LiquidCrystal::begin(16,2);
+  LiquidCrystal::begin(16, 2);
 }
 
 void EcranLCD::refresh()
 {
- 
 }
 
 size_t EcranLCD::write(uint8_t c)
@@ -203,7 +201,15 @@ uint8_t EcranLCD::mapUnicodeToExtASCII(unsigned int unicode)
 void EcranLCD::ecrire(const char *msg, int line)
 {
 
-  if (line >= 0 && line < (SCREEN_HEIGHT ))
+  if (line >= 0 && line < (SCREEN_HEIGHT))
+  {
+    writeFromBeginning(msg, line);
+  }
+}
+void EcranLCD::ecrire(String msg, int line)
+{
+
+  if (line >= 0 && line < (SCREEN_HEIGHT))
   {
     writeFromBeginning(msg, line);
   }
@@ -219,9 +225,9 @@ void EcranLCD::effacer(int line)
   else
   {
 
-    if (line < (SCREEN_HEIGHT ))
+    if (line < (SCREEN_HEIGHT))
     {
-      EcranLCD::ecrire("                " ,line);
+      EcranLCD::ecrire("                ", line);
     }
   }
 }
@@ -230,15 +236,10 @@ void EcranLCD::writeFromBeginning(const char *msg, int line)
 {
   String buffer = msg;
 
-  EcranLCD::writeFromBeginning(buffer,line);
- 
+  EcranLCD::writeFromBeginning(buffer, line);
 }
 void EcranLCD::writeFromBeginning(String buffer, int line)
 {
   setCursor(0, line);
   print(buffer);
-
- 
 }
-
-

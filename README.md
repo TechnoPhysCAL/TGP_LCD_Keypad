@@ -69,7 +69,7 @@ void loop()
 LCDKeypad()
 LCDKeypad(int rs, int en, int d4, int d5, int d6, int d7, int retro_broche, int keypad_broche)
 ```
-À l'initialisation, les divers éléments qui constituent Le LCD Keypad sont initialisés selon leur broches respectives. Si non spécifiés, les valeurs par défault sont rs = 8, en = 9, d4 = 4, d5 = 5, d6 = 6, d7 = 8, retro_broche = 10 et keypad_broche = 0.
+À l'initialisation, les divers éléments qui constituent le blindage LCD Keypad sont initialisés selon leurs broches respectives. Si non spécifiées, les valeurs par défault sont rs = 8, en = 9, d4 = 4, d5 = 5, d6 = 6, d7 = 7, retro_broche = 10 et keypad_broche = 0.
 
 ## Propriétés disponibles
 

@@ -9,16 +9,17 @@ static int _keys_limits[NB_BOUTONS_LCD] = {49, 176, 331, 523, 830};
 /***************************************************************
 // Constructeur
 //***************************************************************/
-LCDKeypad::LCDKeypad() : droite(0, _keys_limits[0]),
-						 haut(_keys_limits[0], _keys_limits[1]),
-						 bas(_keys_limits[1], _keys_limits[2]),
-						 gauche(_keys_limits[2], _keys_limits[3]),
-						 selection(_keys_limits[3], _keys_limits[4]),
-						 ecran(),
-						 retro(10),
-						 calibration()
+LCDKeypad::LCDKeypad(int rs, int en, int d4, int d5, int d6, int d7, int bcklight, int keypad) : droite(0, _keys_limits[0]),
+																								 haut(_keys_limits[0], _keys_limits[1]),
+																								 bas(_keys_limits[1], _keys_limits[2]),
+																								 gauche(_keys_limits[2], _keys_limits[3]),
+																								 selection(_keys_limits[3], _keys_limits[4]),
+																								 ecran(rs, en, d4, d5, d6, d7),
+																								 retro(bcklight),
+																								 calibration()
 {
-	pinMode(PIN_KEYPAD, INPUT);
+	_pin_keypad = keypad;
+	pinMode(_pin_keypad, INPUT);
 }
 
 /***************************************************************************************
@@ -55,19 +56,19 @@ void LCDKeypad::begin(int eepromAddress)
 	ecran.begin();
 	retro.on();
 	retro.refresh();
-	int * key_values = calibration.calibrer(&ecran, eepromAddress);
+	int *key_values = calibration.calibrer(_pin_keypad, &ecran, eepromAddress);
 
-	selection.setLimits((key_values[1]+key_values[0])/2, (key_values[0]+1023)/2);
-	gauche.setLimits((key_values[2]+key_values[1])/2,(key_values[1]+key_values[0])/2);
-	bas.setLimits((key_values[3]+key_values[2])/2,(key_values[2]+key_values[1])/2);
-	haut.setLimits((key_values[4]+key_values[3])/2, (key_values[3]+key_values[2])/2);
-	droite.setLimits(0, (key_values[4]+key_values[3])/2);
+	selection.setLimits((key_values[1] + key_values[0]) / 2, (key_values[0] + 1023) / 2);
+	gauche.setLimits((key_values[2] + key_values[1]) / 2, (key_values[1] + key_values[0]) / 2);
+	bas.setLimits((key_values[3] + key_values[2]) / 2, (key_values[2] + key_values[1]) / 2);
+	haut.setLimits((key_values[4] + key_values[3]) / 2, (key_values[3] + key_values[2]) / 2);
+	droite.setLimits(0, (key_values[4] + key_values[3]) / 2);
 }
 void LCDKeypad::refresh()
 {
 	retro.refresh();
 	//ecran.refresh();
-	int value = analogRead(PIN_KEYPAD);
+	int value = analogRead(_pin_keypad);
 
 	gauche.setKeyValue(value);
 	droite.setKeyValue(value);

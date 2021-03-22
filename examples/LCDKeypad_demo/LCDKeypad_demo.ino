@@ -10,6 +10,8 @@
 
 #include <LCDKeypad.h>
 LCDKeypad lcdKeypad;
+//LCDKeypad proto(8,9,4,5,6,7,10,0);  //Possibiltié de modifier les broches respectives des éléments du blindage
+
 
 void setup()
 {

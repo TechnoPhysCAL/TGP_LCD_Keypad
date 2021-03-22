@@ -10,9 +10,19 @@
 #include "EcranLCD.h"
 #include "Del.h"
 
-#define PIN_KEYPAD 0
 #define NB_BOUTONS_LCD 5
-#define DEFAULT_EEPPROM_ADDRESS 0
+#define EEPPROM_ADDRESS_DEFAULT 0
+
+#define PIN_SCREEN_RS_DEFAULT 8
+#define PIN_SCREEN_EN_DEFAULT 9
+#define PIN_SCREEN_D4_DEFAULT 4
+#define PIN_SCREEN_D5_DEFAULT 5
+#define PIN_SCREEN_D6_DEFAULT 6
+#define PIN_SCREEN_D7_DEFAULT 7
+
+#define PIN_SCREEN_BACKLIGHT_DEFAULT 10
+
+#define PIN_KEYPAD_DEFAULT 0
 
 /******************************************************************************
 * Definitions
@@ -20,8 +30,17 @@
 class LCDKeypad
 {
 public:
-  LCDKeypad();
-  void begin(int eepromAddress = DEFAULT_EEPPROM_ADDRESS);
+  LCDKeypad(
+    int rs = PIN_SCREEN_RS_DEFAULT, 
+  int en = PIN_SCREEN_EN_DEFAULT, 
+  int d4 = PIN_SCREEN_D4_DEFAULT, 
+  int d5 = PIN_SCREEN_D5_DEFAULT, 
+  int d6 = PIN_SCREEN_D6_DEFAULT,
+  int d7 = PIN_SCREEN_D7_DEFAULT,
+  int bcklight = PIN_SCREEN_BACKLIGHT_DEFAULT,
+  int keypad =PIN_KEYPAD_DEFAULT
+  );
+  void begin(int eepromAddress = EEPPROM_ADDRESS_DEFAULT);
   void refresh();
 
   void setDebounceDelay(unsigned long);
@@ -33,6 +52,7 @@ public:
   Del retro;
 
 private:
+int _pin_keypad;
   Calibration calibration;
 };
 

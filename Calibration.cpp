@@ -18,35 +18,35 @@ Calibration::Calibration()
 //Routine optionnelle de calibration, si la touche RIGHT est enfoncée
 //au moment de l'appel de cette fonction
 //*********************************************************************
-int * Calibration::calibrer(LiquidCrystal *lcd, int eepromAddress)
+int * Calibration::calibrer(int pin, LiquidCrystal *lcd, int eepromAddress)
 {
 	const int Nb_Boutons = 5;
 	String boutonNames[] = {"SELECT", "LEFT  ", "DOWN  ", "UP   ", "RIGHT "};
 	//static int _keys_values[5] = {638, 408, 255, 98, 0};
 	lireEEPROM(eepromAddress);
-	if (lireAnalog() < 30)
+	if (analogRead(pin) < 30)
 	{
 		lcd->clear();
 		lcd->print("Calibration");
 		for (int i = 0; i < Nb_Boutons; i++)
 		{
-			while (lireAnalog() < 1000)
+			while (analogRead(pin) < 1000)
 			{
 			}
 			lcd->setCursor(0, 0);
 			lcd->print("Appuie sur ");
 			lcd->print(boutonNames[i]);
-			while (lireAnalog() > 1000)
+			while (analogRead(pin) > 1000)
 			{
 			}
 			delay(100);
-			_keys_values[i] = lireAnalog();
+			_keys_values[i] = analogRead(pin);
 			lcd->setCursor(0, 1);
 			lcd->print(_keys_values[i]);
 			lcd->print("    ");
 			lcd->setCursor(0, 0);
 			lcd->print("APPUYE          ");
-			while (lireAnalog() < 1000)
+			while (analogRead(pin) < 1000)
 			{
 			}
 			delay(100);
@@ -72,8 +72,5 @@ void Calibration::ecrireEEPROM(int address)
 {
 	EEPROM.put(address,_keys_values);
 }
-int Calibration::lireAnalog()
-{
-	return analogRead(KEY_PIN);
-}
+
 ;
