@@ -99,9 +99,10 @@ Permet d'accéder à l'objet de type EcranLCD, qui offre les mêmes fonctionnali
 ## Méthodes disponibles
 ```cpp
 void begin()
-void begin(int epprom_addres)
+void begin(int epprom_addres) //Sur architecture Arduino
+void begin(const char * name) //Sur architecture ESP32
 ```
-Initialise toutes les composantes du blindage. Pour la calibration des boutons, on peut préciser l'adresse mémoire dans le EEPROM qui contient ces valeurs (par défaut adresse 0).
+Initialise toutes les composantes du blindage. Pour la calibration des boutons, on peut préciser l'endroit en mémoire qui contient ces valeurs. Sur Arduino, on doit fournir une adresse du EEPROM (par défaut 0); sur ESP32, on doit fournir le nom d'un espace pour stocker en mémoire EEPROM via la librairie Preferences (par défaut "lcd-keypad").ESP32, 
 
 ---
 ```cpp
