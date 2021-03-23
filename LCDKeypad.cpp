@@ -51,14 +51,22 @@ void LCDKeypad::setLongPressInterval(unsigned long interval)
 	selection.setLongPressInterval(interval);
 }
 
+#ifdef ESP_PLATFORM
+void LCDKeypad::begin(const char *name)
+#else
 void LCDKeypad::begin(int eepromAddress)
+#endif
 {
 	ecran.begin();
 	retro.on();
 	retro.refresh();
-	int *key_values = calibration.calibrer(_pin_keypad, &ecran, eepromAddress);
+#ifdef ESP_PLATFORM
+	uint16_t *key_values = calibration.calibrer(_pin_keypad, &ecran, name);
+#else
+	uint16_t *key_values = calibration.calibrer(_pin_keypad, &ecran, eepromAddress);
+#endif
 
-	selection.setLimits((key_values[1] + key_values[0]) / 2, (key_values[0] + 1023) / 2);
+	selection.setLimits((key_values[1] + key_values[0]) / 2, (key_values[0] + MAX_ANALOG) / 2);
 	gauche.setLimits((key_values[2] + key_values[1]) / 2, (key_values[1] + key_values[0]) / 2);
 	bas.setLimits((key_values[3] + key_values[2]) / 2, (key_values[2] + key_values[1]) / 2);
 	haut.setLimits((key_values[4] + key_values[3]) / 2, (key_values[3] + key_values[2]) / 2);

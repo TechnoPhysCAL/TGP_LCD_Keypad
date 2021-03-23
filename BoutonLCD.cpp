@@ -1,20 +1,19 @@
 #include "BoutonLCD.h"
 
-BoutonLCD::BoutonLCD(int min, int max) : BoutonBase()
+BoutonLCD::BoutonLCD(uint16_t min, uint16_t max) : BoutonBase()
 {
 	_min = min;
 	_max = max;
 	_front = LOW;
 }
 
-void BoutonLCD::setLimits(int min, int max)
+void BoutonLCD::setLimits(uint16_t min, uint16_t max)
 {
-	Serial.println(String(min)+" "+max);
 	_min = min;
 	_max = max;
 }
 
-void BoutonLCD::setKeyValue(int value)
+void BoutonLCD::setKeyValue(uint16_t value)
 {
 	_keyValue = value;
 }

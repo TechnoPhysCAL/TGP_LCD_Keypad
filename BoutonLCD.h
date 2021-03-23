@@ -6,18 +6,18 @@
 class BoutonLCD : public BoutonBase
 {
 public:
-  BoutonLCD(int min, int max);
-  void setKeyValue(int value);
-  void setLimits(int min, int max);
+  BoutonLCD(uint16_t min, uint16_t max);
+  void setKeyValue(uint16_t value);
+  void setLimits(uint16_t min, uint16_t max);
 
 protected:
   bool isDetected();
 
 private:
-  int _keyValue; //should be static, to do
   int _front;
-  int _min;
-  int _max;
+  uint16_t _keyValue; //should be static, to do
+  uint16_t _min;
+  uint16_t _max;
 };
 
 #endif

@@ -11,6 +11,7 @@ EcranLCD::EcranLCD(int rs, int en, int d4, int d5, int d6, int d7) : LiquidCryst
 void EcranLCD::begin()
 {
   LiquidCrystal::begin(16, 2);
+  delay(100);
 }
 
 void EcranLCD::refresh()

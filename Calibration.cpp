@@ -1,13 +1,10 @@
 #include "Calibration.h"
 
-#define KEY_PIN 0
-
 /***************************************************************
 // Constructeur
 //***************************************************************/
 Calibration::Calibration()
 {
-
 }
 
 /***************************************************************************************
@@ -18,25 +15,31 @@ Calibration::Calibration()
 //Routine optionnelle de calibration, si la touche RIGHT est enfoncée
 //au moment de l'appel de cette fonction
 //*********************************************************************
-int * Calibration::calibrer(int pin, LiquidCrystal *lcd, int eepromAddress)
+
+#ifdef ESP_PLATFORM
+uint16_t *Calibration::calibrer(int pin, LiquidCrystal *lcd, const char *location)
+#else
+uint16_t *Calibration::calibrer(int pin, LiquidCrystal *lcd, int location)
+#endif
+
 {
 	const int Nb_Boutons = 5;
 	String boutonNames[] = {"SELECT", "LEFT  ", "DOWN  ", "UP   ", "RIGHT "};
-	//static int _keys_values[5] = {638, 408, 255, 98, 0};
-	lireEEPROM(eepromAddress);
-	if (analogRead(pin) < 30)
+
+	lireEEPROM(location);
+	if (analogRead(pin) < SEUIL_BAS)
 	{
 		lcd->clear();
 		lcd->print("Calibration");
 		for (int i = 0; i < Nb_Boutons; i++)
 		{
-			while (analogRead(pin) < 1000)
+			while (analogRead(pin) < SEUIL_HAUT)
 			{
 			}
 			lcd->setCursor(0, 0);
 			lcd->print("Appuie sur ");
 			lcd->print(boutonNames[i]);
-			while (analogRead(pin) > 1000)
+			while (analogRead(pin) > SEUIL_HAUT)
 			{
 			}
 			delay(100);
@@ -46,31 +49,50 @@ int * Calibration::calibrer(int pin, LiquidCrystal *lcd, int eepromAddress)
 			lcd->print("    ");
 			lcd->setCursor(0, 0);
 			lcd->print("APPUYE          ");
-			while (analogRead(pin) < 1000)
+			while (analogRead(pin) < SEUIL_HAUT)
 			{
 			}
 			delay(100);
 		}
 		lcd->clear();
 		lcd->print("OK.");
-		ecrireEEPROM(eepromAddress);
+		ecrireEEPROM(location);
 		delay(500);
 
-		//bouton.ajusterValeursBouton(_keys_values[0],_keys_values[1],_keys_values[2],_keys_values[3],_keys_values[4]);
-		//bouton.ecrireEEPROM();
 		lcd->clear();
-		return _keys_values;
 	}
+	return _keys_values;
 }
 
-void Calibration::lireEEPROM(int address)
+#ifdef ESP_PLATFORM
+void Calibration::lireEEPROM(const char *location)
 {
-	EEPROM.get(address, _keys_values);
-
+	preferences.begin(location, true);
+	_keys_values[0] = preferences.getUShort("s", MAX_ANALOG * 0.8);
+	_keys_values[1] = preferences.getUShort("l", MAX_ANALOG * 0.5);
+	_keys_values[2] = preferences.getUShort("d", MAX_ANALOG * 0.3);
+	_keys_values[3] = preferences.getUShort("u", MAX_ANALOG * 0.1);
+	_keys_values[4] = preferences.getUShort("r", MAX_ANALOG * 0.0);
+	preferences.end();
 }
-void Calibration::ecrireEEPROM(int address)
+void Calibration::ecrireEEPROM(const char *location)
 {
-	EEPROM.put(address,_keys_values);
+	preferences.begin(location, false);
+	preferences.putUShort("s", _keys_values[0]);
+	preferences.putUShort("l", _keys_values[1]);
+	preferences.putUShort("d", _keys_values[2]);
+	preferences.putUShort("u", _keys_values[3]);
+	preferences.putUShort("r", _keys_values[4]);
+	preferences.end();
 }
 
-;
+#else
+void Calibration::lireEEPROM(int location)
+{
+	EEPROM.get(location, _keys_values);
+}
+void Calibration::ecrireEEPROM(int location)
+{
+	EEPROM.put(address, _keys_values);
+}
+#endif

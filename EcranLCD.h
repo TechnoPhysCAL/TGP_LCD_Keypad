@@ -13,7 +13,7 @@
 class EcranLCD : public LiquidCrystal
 {
 public:
-    EcranLCD(int rs, int em, int d4, int d5, int d6, int d7);
+    EcranLCD(int rs, int en, int d4, int d5, int d6, int d7);
     void begin();
     void refresh();
     size_t write(uint8_t c);
