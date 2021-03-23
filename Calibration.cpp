@@ -93,6 +93,6 @@ void Calibration::lireEEPROM(int location)
 }
 void Calibration::ecrireEEPROM(int location)
 {
-	EEPROM.put(address, _keys_values);
+	EEPROM.put(location, _keys_values);
 }
 #endif
