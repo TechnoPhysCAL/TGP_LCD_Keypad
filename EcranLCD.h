@@ -18,17 +18,16 @@ public:
     void refresh();
     size_t write(uint8_t c);
 
-    void ecrire(const char *str, int line = 0, byte padding = 0);
-    void ecrire(String str, int line = 0, byte padding = 0);
-
-    void effacer(int line = -1);
+    void ecrire(const char *str, int x = 0, int y = 0, int largeur = 0);
+    void ecrire(String str, int x = 0, int y = 0, int largeur = 0);
+    void effacer(int x = -1, int y = -1, int largeur = -1);
 
 private:
     uint8_t _utf8;
     bool _utf8_error;
     unsigned int _unicode;
     uint8_t mapUnicodeToExtASCII(unsigned int _unicode);
-    void writeFromBeginning(const char *str, int line);
-    void writeFromBeginning(String str, int line);
+    void writeFromBeginning(const char *str, int x, int y, int largeur);
+    void writeFromBeginning(String str, int x, int y, int largeur);
 };
 #endif

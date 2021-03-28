@@ -199,51 +199,52 @@ uint8_t EcranLCD::mapUnicodeToExtASCII(unsigned int unicode)
   return 0;
 }
 
-void EcranLCD::ecrire(const char *msg, int line, byte padding)
+void EcranLCD::ecrire(const char *msg, int x, int y, int largeur)
 {
 
-  if (line >= 0 && line < (SCREEN_HEIGHT))
+  if (y >= 0 && y < (SCREEN_HEIGHT))
   {
-    writeFromBeginning(msg, line, padding);
+    writeFromBeginning(msg, x, y, largeur);
   }
 }
-void EcranLCD::ecrire(String msg, int line, byte padding)
+void EcranLCD::ecrire(String msg, int x, int y, int largeur)
 {
 
-  if (line >= 0 && line < (SCREEN_HEIGHT))
+  if (y >= 0 && y < (SCREEN_HEIGHT))
   {
-    writeFromBeginning(msg, line, padding);
+    writeFromBeginning(msg, x, y, largeur);
   }
 }
 
-void EcranLCD::effacer(int line)
+void EcranLCD::effacer(int x, int y, int largeur)
 
 {
-  if (line < 0)
+  if (x < 0 || y < 0)
   {
     clear();
   }
   else
   {
 
-    if (line < (SCREEN_HEIGHT))
+    setCursor(x, y);
+    for (int i = 0; i < largeur; i++)
     {
-      EcranLCD::ecrire("                ", line);
+      print(' ');
     }
   }
 }
 
-void EcranLCD::writeFromBeginning(const char *msg, int line, byte padding);
+void EcranLCD::writeFromBeginning(const char *msg, int x, int y, int largeur)
 {
   String buffer = msg;
 
-  EcranLCD::writeFromBeginning(buffer, line, padding);
+  EcranLCD::writeFromBeginning(buffer, x, y, largeur);
 }
-void EcranLCD::writeFromBeginning(String buffer, int line, byte padding)
+void EcranLCD::writeFromBeginning(String buffer, int x, int y, int largeur)
 {
-  setCursor(0, line);
+  setCursor(x, y);
   print(buffer);
-  for (int i = buffer.length(); i < padding; i++)
+  for (int i = buffer.length(); i < largeur; i++)
   {
     print(' ');
   }

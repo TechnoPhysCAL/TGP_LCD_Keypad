@@ -5,6 +5,8 @@ Permet le contrôle simplifié d'un blindage "LCD Keypad Shield". Incluant les 5
 ## Détails
 
 ## Notes de version
+-1.0.0 Première version officielle
+
 -0.9.0 Version d'essai avant utilisation officielle
 
 ## Calibration
@@ -36,18 +38,18 @@ void loop()
 
   if (lcdKeypad.selection.isPressed()) //Le bouton selection est appuyé
   {
-    lcdKeypad.ecran.ecrire("Bonjour monde!", 0);
+    lcdKeypad.ecran.ecrire("Bonjour monde!"); //affiche par défaut à la coordonnée (0,0).
   }
   
   if (lcdKeypad.gauche.isPressed()) //Le bouton selection est appuyé
   {
-    lcdKeypad.ecran.ecrire("Gauche..", 1, 16);
+    lcdKeypad.ecran.ecrire("Gauche..",0, 1, 8); //affiche à la coordonnée (0,1) sur un espace de 8 caractères.
   }
   
   if (lcdKeypad.droite.isPressed()) //Le bouton selection est appuyé
   {
-    lcdKeypad.ecran.effacer(1);
-    lcdKeypad.ecran.ecrire("...Droite!", 1, 16);
+    
+    lcdKeypad.ecran.ecrire("...Droite!",8, 1, 8); //affiche à la coordonnée (8,1) sur un espace de 8 caractères.
   }
 
   if (lcdKeypad.haut.isPressed() )  //Le bouton HAUT ou BAS est appuyé
@@ -133,21 +135,20 @@ Permet de modifier le temps en millisecondes entre chaque valeur vraie de la mé
 
 ```cpp
 void ecrire(char *str)
-void ecrire(char *str, int line)
-void ecrire(char *str, int line, byte padding)
+void ecrire(char *str, int x, int y, int largeur)
 void ecrire(String str)
-void ecrire(String str, int line)
-void ecrire(String *str, int line, byte padding)
+void ecrire(String str, int x, int y, int largeur)
+
 ```
-Permet d'afficher une chaîne de texte à l'écran, à ligne voulue (0 ou 1, par défault 0 si non spécifié). On peut spécifier une largeur de padding (par défaut 0), et si le texte à écrire est inférieur à la valeur de padding, on complétera avec des espaces ' ', ce qui est peut être utile pour effacer du texte précédemment écrit.
+Permet d'afficher une chaîne de texte à l'écran, à la coordonnée voulue ( (0,0) par défaut si non spécifié). On peut spécifier une largeur (par défaut 0), et si le texte à écrire est inférieur à la valeur de largeur, on complétera avec des espaces ' ', ce qui est peut être utile pour effacer du texte précédemment écrit.
 
 --- 
 ```cpp
 void effacer()
-void effacer(int line)
+void effacer(int x, int y, int largeur)
 
 ```
-Permet d'effacer tout l'écran (si aucun paramètre n'est fourni), ou seulement une ligne spécifique (0 ou 1, ou -1 pour effacer tout l'écran).
+Permet d'effacer tout l'écran (si aucun paramètre n'est fourni), ou seulement un espace spécifique débutant à la coordonnée (x,y) et de largeur spécifié.
 
 ### Remarque
 
