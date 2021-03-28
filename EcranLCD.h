@@ -18,8 +18,8 @@ public:
     void refresh();
     size_t write(uint8_t c);
 
-    void ecrire(const char *str, int line = 0);
-    void ecrire(String str, int line = 0);
+    void ecrire(const char *str, int line = 0, byte padding = 0);
+    void ecrire(String str, int line = 0, byte padding = 0);
 
     void effacer(int line = -1);
 

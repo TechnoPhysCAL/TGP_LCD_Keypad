@@ -34,17 +34,6 @@ void loop()
 {
   lcdKeypad.refresh();
 
-  if (lcdKeypad.haut.isPressed() || lcdKeypad.haut.isLongPressed())  //Le bouton HAUT ou BAS est appuyé
-  {
-    lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() + 5); //Augmenter la luminosité du rétroéclairage
-
-  }
-  if (lcdKeypad.bas.isPressed() || lcdKeypad.bas.isLongPressed())  //Le bouton HAUT ou BAS est appuyé
-  {
-    lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() - 5); //Diminuer la luminosité du rétroéclairage
-
-  }
-
   if (lcdKeypad.selection.isPressed()) //Le bouton selection est appuyé
   {
     lcdKeypad.ecran.ecrire("Bonjour monde!", 0);
@@ -52,14 +41,24 @@ void loop()
   
   if (lcdKeypad.gauche.isPressed()) //Le bouton selection est appuyé
   {
-    lcdKeypad.ecran.effacer( 1);
-    lcdKeypad.ecran.ecrire("Gauche..", 1);
+    lcdKeypad.ecran.ecrire("Gauche..", 1, 16);
   }
   
   if (lcdKeypad.droite.isPressed()) //Le bouton selection est appuyé
   {
     lcdKeypad.ecran.effacer(1);
-    lcdKeypad.ecran.ecrire("        ..Droite!", 1);
+    lcdKeypad.ecran.ecrire("...Droite!", 1, 16);
+  }
+
+  if (lcdKeypad.haut.isPressed() )  //Le bouton HAUT ou BAS est appuyé
+  {
+    lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() + 5); //Augmenter la luminosité du rétroéclairage
+
+  }
+  if (lcdKeypad.bas.isPressed())  //Le bouton HAUT ou BAS est appuyé
+  {
+    lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() - 5); //Diminuer la luminosité du rétroéclairage
+
   }
 }
 ```
@@ -135,11 +134,12 @@ Permet de modifier le temps en millisecondes entre chaque valeur vraie de la mé
 ```cpp
 void ecrire(char *str)
 void ecrire(char *str, int line)
+void ecrire(char *str, int line, byte padding)
 void ecrire(String str)
-void ecrire(Strin str, int line)
-
+void ecrire(String str, int line)
+void ecrire(String *str, int line, byte padding)
 ```
-Permet d'afficher une chaîne de texte à l'écran, à ligne voulue (0 ou 1, par défault 0 si non spécifié) .
+Permet d'afficher une chaîne de texte à l'écran, à ligne voulue (0 ou 1, par défault 0 si non spécifié). On peut spécifier une largeur de padding (par défaut 0), et si le texte à écrire est inférieur à la valeur de padding, on complétera avec des espaces ' ', ce qui est peut être utile pour effacer du texte précédemment écrit.
 
 --- 
 ```cpp
