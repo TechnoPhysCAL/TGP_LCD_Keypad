@@ -36,28 +36,28 @@ void loop()
 {
   lcdKeypad.refresh();
 
-  if (lcdKeypad.selection.isPressed()) //Le bouton selection est appuyé
+  if (lcdKeypad.selection.isPressed()) //Le bouton SELECTION est appuyé
   {
     lcdKeypad.ecran.ecrire("Bonjour monde!"); //affiche par défaut à la coordonnée (0,0).
   }
   
-  if (lcdKeypad.gauche.isPressed()) //Le bouton selection est appuyé
+  if (lcdKeypad.gauche.isPressed()) //Le bouton GAUCHE est appuyé
   {
     lcdKeypad.ecran.ecrire("Gauche..",0, 1, 8); //affiche à la coordonnée (0,1) sur un espace de 8 caractères.
   }
   
-  if (lcdKeypad.droite.isPressed()) //Le bouton selection est appuyé
+  if (lcdKeypad.droite.isPressed()) //Le bouton DROITE est appuyé
   {
     
     lcdKeypad.ecran.ecrire("...Droite!",8, 1, 8); //affiche à la coordonnée (8,1) sur un espace de 8 caractères.
   }
 
-  if (lcdKeypad.haut.isPressed() )  //Le bouton HAUT ou BAS est appuyé
+  if (lcdKeypad.haut.isPressed() )  //Le bouton HAUT appuyé
   {
     lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() + 5); //Augmenter la luminosité du rétroéclairage
 
   }
-  if (lcdKeypad.bas.isPressed())  //Le bouton HAUT ou BAS est appuyé
+  if (lcdKeypad.bas.isPressed())  //Le bouton BAS est appuyé
   {
     lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() - 5); //Diminuer la luminosité du rétroéclairage
 
