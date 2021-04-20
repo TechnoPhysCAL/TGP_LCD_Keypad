@@ -25,34 +25,30 @@ void loop()
 
   lcdKeypad.refresh();
 
-  if (lcdKeypad.haut.isPressed() || lcdKeypad.haut.isLongPressed()) //Le bouton HAUT ou BAS est appuyé
-  {
-    Serial.println("haut");
-    lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() + 5); //Augmenter la luminosité du rétroéclairage
-  }
-  if (lcdKeypad.bas.isPressed() || lcdKeypad.bas.isLongPressed()) //Le bouton HAUT ou BAS est appuyé
-  {
-    Serial.println("bas");
-    lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() - 5); //Diminuer la luminosité du rétroéclairage
-  }
-
   if (lcdKeypad.selection.isPressed()) //Le bouton selection est appuyé
   {
-    Serial.println("selection");
-    lcdKeypad.ecran.ecrire("Bonjour monde!", 0);
+    lcdKeypad.ecran.ecrire("Bonjour monde!"); //affiche par défaut à la coordonnée (0,0).
   }
 
-  if (lcdKeypad.gauche.isPressed()) //Le bouton selection est appuyé
+  if (lcdKeypad.gauche.isPressed()) //Le bouton Gauche est appuyé
   {
-    Serial.println("gauche");
-    lcdKeypad.ecran.effacer(1);
-    lcdKeypad.ecran.ecrire("Gauche..", 1);
+    lcdKeypad.ecran.ecrire("Gauche..", 0, 1, 8); //affiche à la coordonnée (0,1) sur un espace de 8 caractères.
   }
 
-  if (lcdKeypad.droite.isPressed()) //Le bouton selection est appuyé
+  if (lcdKeypad.droite.isPressed()) //Le bouton Droite est appuyé
   {
-    Serial.println("droite");
-    lcdKeypad.ecran.effacer(1);
-    lcdKeypad.ecran.ecrire("        ..Droite!", 1);
+
+    lcdKeypad.ecran.ecrire("...Droite!", 8, 1, 8); //affiche à la coordonnée (8,1) sur un espace de 8 caractères.
+  }
+
+  if (lcdKeypad.haut.isPressed() || lcdKeypad.haut.isLongPressed()) //Le bouton HAUT  est appuyé
+  {
+
+    lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() + 5); //Augmenter la luminosité du rétroéclairage
+  }
+  if (lcdKeypad.bas.isPressed() || lcdKeypad.bas.isLongPressed()) //Le bouton BAS est appuyé
+  {
+
+    lcdKeypad.retro.setBrightness(lcdKeypad.retro.getBrightness() - 5); //Diminuer la luminosité du rétroéclairage
   }
 }
